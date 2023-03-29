@@ -5,15 +5,13 @@
         </header>
         <ul>
             <friend-contact 
-                name="Hirwa Jean Pippen"
-                phone-number="48123457"
-                email-address="hirwajean@hotmail.com" 
+              v-for="friend in friends" :key="friend.id"
+                :name="friend.name"
+                :phone-number="friend.phone"
+                :email-address="friend.email" 
+                :is-favorite="true" 
             ></friend-contact>
-            <friend-contact
-                name="Mohammed Raafat"
-                phone-number="48120000"
-                email-address="mohammedraafat@outlook.com" 
-            ></friend-contact>
+            
         </ul>
     </section>
 </template>
@@ -109,3 +107,4 @@ header {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
 </style>
+
