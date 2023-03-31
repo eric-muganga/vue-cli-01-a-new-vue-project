@@ -1,7 +1,7 @@
 
 <template>
      <li>
-          <h2>{{ name }} {{ this.friendIsFavorite === '1' ? '(Favourite)' : '' }}</h2>
+          <h2>{{ name }} {{ isFavorite ? '(Favourite)' : '' }}</h2>
           <button @click="toggleFavorite">Favourite</button>
           <button @click="deatailsVisibility">{{ areDetailsVisible ? 'Hide ' : 'Show '}} Details</button>
           <ul v-if="areDetailsVisible">
@@ -28,12 +28,16 @@ export default{
     //     'isFavorite'
     // ],
     props: {
+        id: {
+            type: String,
+            required: true,
+        },
         name: {
             type: String,
             required: true,
         },
         phoneNumber: {
-            type: String,
+            type: Number,
             required: true,
         },
         emailAddress:{
@@ -48,7 +52,19 @@ export default{
             //     return value === '1' || value === '0';
             // }
         },
+        
     },
+    emits: ['toggle-favorite'],
+        // emits:{
+        //     'toggle-favorite': function(id){
+        //         if(id){
+        //             return true;
+        //         }else{
+        //             console.warn('Id is missing')
+        //             return false;
+        //         }
+        //     }
+        // }
     data() {
         return {
             areDetailsVisible: false,
@@ -58,7 +74,7 @@ export default{
                 phone: 48123457,
                 email: 'hirwajean@hotmail.com'
             },
-            friendIsFavorite:this.isFavorite,
+            
         }
     },
     methods: {
@@ -66,11 +82,8 @@ export default{
             this.areDetailsVisible = !this.areDetailsVisible;
         },
         toggleFavorite(){
-            if(this.friendIsFavorite === '1'){
-                this.friendIsFavorite = '0;'
-            }else{
-                this.friendIsFavorite = '1';
-            }
+            //to setup communication from the friendContact Component.vue to the parent App.vue  
+            this.$emit('toggle-favorite', this.id);//kebab-case is recommended for event listeners in templates.
         }
     }
 }
