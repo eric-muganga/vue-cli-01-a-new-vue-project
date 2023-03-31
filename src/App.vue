@@ -6,10 +6,12 @@
         <ul>
             <friend-contact 
               v-for="friend in friends" :key="friend.id"
+                :id="friend.id"
                 :name="friend.name"
                 :phone-number="friend.phone"
                 :email-address="friend.email" 
-                :is-favorite="true" 
+                :is-favorite="friend.isFavorite" 
+                @toggle-favourite="toggleFavoriteStatus"
             ></friend-contact>
             
         </ul>
@@ -27,18 +29,26 @@ export default {
                     id: 'Hirwa',
                     name: 'Hirwa Jean Pippen',
                     phone: 48123457,
-                    email: 'hirwajean@hotmail.com'
+                    email: 'hirwajean@hotmail.com',
+                    isFavorite: true
                 },
                 {
                     id: 'Mohammed',
                     name: 'Mohammed Raafat',
                     phone: 48120000,
-                    email: 'mohammedraafat@outlook.com'
+                    email: 'mohammedraafat@outlook.com',
+                    isFavorite: false
                 }
             ],
             //areDetailsVisible: false,
         }
     },
+    methods:{
+      toggleFavoriteStatus(friendId){
+        const identifiedFriend = this.friends.find(friend => friend.id === friendId);
+        identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
+      }
+    }
 }
 </script>
 
@@ -107,4 +117,5 @@ header {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
 </style>
+
 
