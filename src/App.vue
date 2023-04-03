@@ -13,6 +13,7 @@
                 :email-address="friend.email" 
                 :is-favorite="friend.isFavorite" 
                 @toggle-favourite="toggleFavoriteStatus"
+                @delete="deleteFriendContact"
             ></friend-contact>
             
         </ul>
@@ -49,9 +50,24 @@ export default {
         const identifiedFriend = this.friends.find(friend => friend.id === friendId);
         identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
       },
-      addFriend(){
-        
-      }
+      addFriend(name, phone, email){
+        const newFriendContact = {
+          id: new Date().toISOString(),
+          name: name,
+          phone: phone,
+          email: email,
+          isFavorite: false,
+        };
+        this.friends.push(newFriendContact);
+      },
+      deleteFriendContact(friendId){
+        //filter() is a built-in method available on arrays that allows you to 
+        //create a new array with all elements that pass a certain test.
+        //The filter() method takes a callback function as its argument and
+        //applies that function to each element of the array, returning a new
+        //array containing only the elements for which the callback function returned true.
+          this.friends = this.friends.filter(friend => friend.id != friendId);
+        }
     }
 }
 </script>
