@@ -1,5 +1,6 @@
 
 
+
 <template>
      <li>
           <h2>{{ name }} {{ isFavorite ? '(Favourite)' : '' }}</h2>
@@ -9,6 +10,7 @@
             <li><strong>Phone:</strong>{{ phoneNumber }}</li>
             <li><strong>Email:</strong>{{ emailAddress }}</li>
           </ul>
+          <button @click="deleteContact" >Delete Contact</button>
         </li>
 </template>
 
@@ -87,8 +89,12 @@ export default{
         toggleFavorite(){
             //to setup communication from the friendContact Component.vue to the parent App.vue  
             this.$emit('toggle-favorite', this.id);//kebab-case is recommended for event listeners in templates.
+        },
+        deleteContact(){
+            this.$emit('delete', this.id);
         }
     }
 }
 </script>
+
 
