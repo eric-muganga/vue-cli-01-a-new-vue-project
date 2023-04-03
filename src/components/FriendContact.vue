@@ -1,4 +1,5 @@
 
+
 <template>
      <li>
           <h2>{{ name }} {{ isFavorite ? '(Favourite)' : '' }}</h2>
@@ -27,6 +28,7 @@ export default{
     //     'emailAddress',
     //     'isFavorite'
     // ],
+    //Props are there to send data into a component 
     props: {
         id: {
             type: String,
@@ -54,6 +56,7 @@ export default{
         },
         
     },
+    //Emits are there to send data out of the component
     emits: ['toggle-favorite'],
         // emits:{
         //     'toggle-favorite': function(id){
@@ -88,3 +91,4 @@ export default{
     }
 }
 </script>
+
